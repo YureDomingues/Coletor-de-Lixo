@@ -1,22 +1,14 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include "lista.h"
 
-typedef struct lista{
-    void* endereco;
-    int qtdPtr;
-    struct lista* prox;
-}lista;
-
-void criar_lista(lista **l){
-    l = NULL;
-}
 
 lista* busca_endereco(lista *l, void* endereco){
     if(l != NULL){
         if(endereco == l->endereco){
             return l;
         }else{
-            return existe_endereco(l, endereco);
+            return busca_endereco(l->prox, endereco);
         }
     }
     return NULL;
@@ -38,7 +30,7 @@ void inserir_endereco(lista **l, void* endereco){
     }
 }
 
-void remover_elemento(lista** l, int endereco){
+void remover_elemento(lista** l, void* endereco){
 	if(*l != NULL){
 
 		if((*l)->endereco == endereco){
@@ -50,4 +42,13 @@ void remover_elemento(lista** l, int endereco){
 		}
 
 	}
+}
+
+void print_lista(lista *l){
+    if(l != NULL){
+        printf("[%p,%d] ",l->endereco,l->qtdPtr);
+        print_lista(l->prox);
+    }else{
+        printf("\n");
+    };
 }
