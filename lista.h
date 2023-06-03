@@ -7,8 +7,9 @@ typedef struct lista{
     struct lista* prox;
 }lista;
 
-void inserir_endereco(lista **l, void* endereco);
-lista* busca_endereco(lista *l, void* endereco);
-void remover_elemento(lista** l, void* endereco);
+void inserir_elemento(lista **l, void* elemento);
+lista* buscar_elemento(lista *l, void* elemento);
+void remover_lixo(lista** l);
 void print_lista(lista *l);
+
 #endif

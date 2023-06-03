@@ -1,11 +1,16 @@
 #include "contref.h"
 #include <stdio.h>
-int main(){
+#include <stdlib.h>
 
-    int *a = (int *)malloc2(sizeof(int));
-    int *b = (int *)malloc2(sizeof(int));
-    
-    print_lixo();
-    
+int main(){
+    int *a = (int*) malloc2(sizeof(int));
+    int *b;
+    while(1){
+        b = malloc2(sizeof(int));
+        atrib2(&b, a);
+        print_lixo();
+        dump();
+    }
+
     return 0;
 };

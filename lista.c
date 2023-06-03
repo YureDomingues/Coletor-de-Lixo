@@ -3,44 +3,39 @@
 #include "lista.h"
 
 
-lista* busca_endereco(lista *l, void* endereco){
+lista* buscar_elemento(lista *l, void* elemento){
     if(l != NULL){
-        if(endereco == l->endereco){
+        if(elemento == l->endereco){
             return l;
         }else{
-            return busca_endereco(l->prox, endereco);
+            return buscar_elemento(l->prox, elemento);
         }
     }
     return NULL;
 }
 
-void inserir_endereco(lista **l, void* endereco){
-    lista *p = busca_endereco(*l, endereco);
+void inserir_elemento(lista **l, void* elemento){
+    lista *new = (lista*) malloc(sizeof(lista));
 
-    if(p != NULL){
-        p->qtdPtr++;
-    }else{
-        lista *new = (lista*) malloc(sizeof(lista));
+    new->endereco = elemento;
+    new->qtdPtr = 1;
+    new->prox = *l;
 
-        new->endereco = endereco;
-        new->qtdPtr = 1;
-        new->prox = *l;
-
-        *l = new;
-    }
+    *l = new;
 }
 
-void remover_elemento(lista** l, void* endereco){
-	if(*l != NULL){
 
-		if((*l)->endereco == endereco){
+void remover_lixo(lista** l){
+	if(*l != NULL){
+        remover_lixo((&(*l)->prox));
+        
+		if((*l)->qtdPtr == 0){
+
 			lista *p = *l;
 			*l = (*l)->prox;
 			free(p);
-		}else{
-			remover_elemento(&((*l)->prox), endereco);
-		}
-
+        
+		}  
 	}
 }
 
